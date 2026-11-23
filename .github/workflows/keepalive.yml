@@ -14,11 +14,10 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Ping Supabase
         run: |
-          URL=$(grep -o 'https://[a-z0-9]*\.supabase\.co' config.js 2>/dev/null || true)
-          if [ -z "$URL" ]; then URL="https://ycmwdbejeubukugnrpgw.supabase.co"; fi
+          URL="https://ycmwdbejeubukugnrpgw.supabase.co"
           curl -fsS -X POST "$URL/rest/v1/rpc/lotus_ping" \
             -H "apikey: sb_publishable_zb5T2uZUmGgqXP9SclhCLg_rN-d1Fkd" \
             -H "Content-Type: application/json" -d '{}'
