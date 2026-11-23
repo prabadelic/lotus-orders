@@ -1,4 +1,4 @@
-# LOTUS ORDERS v1.2
+# LOTUS ORDERS v1.3
 
 A shared weekly order list for Raj, his brother and the manager. There are no accounts and no app store, and it costs $0 to run.
 
@@ -9,9 +9,12 @@ A shared weekly order list for Raj, his brother and the manager. There are no ac
 | Type a quantity | The item goes **on the order** (yellow) |
 | Tap a product name | Puts the item on the order with no quantity. Tap the name again to take it off. |
 | Tap ○ | Marks the item **done ✓** (green, crossed out) |
+| **Couldn't get** (button on each item on the order) | Marks it out of stock (grey). It carries over to next week automatically (↻ From last week). |
 | **All / On order / Left to do** | Filters the list. Use *Left to do* while shopping or receiving. |
 | **Send Order** | Asks to confirm, then alerts everyone else: "🛒 Order ready from Raj · 12 items". Tapping **View** on that alert opens *Left to do*. |
-| **Rebuild** | Starts a new blank week for everyone. The product list stays, and this week's quantities show as "Last: 5" hints. |
+| **Rebuild** | Closes the week into **History** and starts a new blank week for everyone. Couldn't-get items carry over, and this week's quantities show as "Last: 5" hints. **Undo** shows for 20 seconds, and works for up to 15 minutes. |
+| **History** | Past weeks (who sent, who finished, what was out) and **Usage** per item over the last 8 weeks. |
+| **Owner PIN** (⚙︎ Settings) | When set, Edit List, Rebuild, Undo and list restore/reset need the PIN. Forgot it? In Supabase → SQL Editor run `select public.lotus_reset_pin('your-store-code');` |
 | **Use last order** | Fills in last week's quantities so you only adjust them. |
 | **Edit List** | Add, rename, remove, reorder and re-categorize products. Changes reach every phone. |
 
@@ -60,7 +63,7 @@ In Safari, tap **Share → Add to Home Screen → Add**. It opens full-screen li
 
 ## Good to know
 - **Security:** the database is locked. Phones can only call the app's functions, and every call needs the store code. Anyone who has the invite link can edit the list, so keep it in your team chat. To change the code, run `select public.lotus_change_code('old-code','new-code');` in the Supabase SQL Editor, then create a new invite.
-- **Free tier:** Supabase pauses a free project after about a week with no activity. Weekly use normally keeps it awake. If it ever pauses, click **Restore** in the Supabase dashboard. Your data is kept.
+- **Free tier:** Supabase pauses a free project after about a week with no activity. The GitHub Action in `.github/workflows/keepalive.yml` pings it every 3 days (and makes a tiny monthly commit so GitHub keeps the schedule running). If it ever pauses anyway, click **Restore** in the Supabase dashboard. Your data is kept.
 - **Two people editing at once:** changes to different items are both kept. For the same item, the most recent change wins. If two people save the product list at the same time, the app asks which version to keep.
 - **Updating the app:** upload the changed files to the repo again. Phones pick up the new version the next time they open the app online.
 - **Optional:** to skip pasting the URL and key on your own phone, put them in `config.js`. The invite link carries them for everyone else either way.
