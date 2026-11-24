@@ -1,4 +1,4 @@
-# LOTUS ORDERS v1.6
+# LOTUS ORDERS v1.7
 
 A shared weekly order list for Raj, his brother and the manager. There are no accounts and no app store, and it costs $0 to run.
 
